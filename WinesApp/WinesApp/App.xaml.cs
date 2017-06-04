@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using WinesApp.Views;
 using Xamarin.Forms;
 
 namespace WinesApp
@@ -13,7 +13,7 @@ namespace WinesApp
         {
             InitializeComponent();
 
-            MainPage = new WinesApp.MainPage();
+            MainPage = new WinesView();
         }
 
         protected override void OnStart()
