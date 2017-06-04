@@ -13,7 +13,7 @@ namespace WinesApp
         {
             InitializeComponent();
 
-            MainPage = new WinesView();
+            MainPage = new  NavigationPage(new WinesView());
         }
 
         protected override void OnStart()

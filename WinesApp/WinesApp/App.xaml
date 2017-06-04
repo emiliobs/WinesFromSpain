@@ -11,6 +11,9 @@
             <!--Locator-->
             <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
             
+            <!--General Color-->
+            <Color x:Key="BackgroundColor">#ffd8c2</Color>
+            
         </ResourceDictionary>
 
 	</Application.Resources>

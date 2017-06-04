@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using WinesApp.Model;
 using WinesApp.Service;
 
@@ -14,21 +16,30 @@ namespace WinesApp.ViewModels
         #region Atributtes
 
         private ApiService apiService;
+        private Navigationservice navigationservice;
 
         #endregion
 
         #region Properties
 
         public ObservableCollection<WineItemViewModel> Wines { get; set; }
+
+        
+
         #endregion
 
         #region Constructor
 
         public MainViewModel()
         {
+            //Service
             apiService = new ApiService();
+            navigationservice = new Navigationservice();
+
+            //View Models;
             Wines = new ObservableCollection<WineItemViewModel>();
                     
+            //Load Data:
             LoadWines();
 
         }
@@ -36,6 +47,15 @@ namespace WinesApp.ViewModels
         #endregion
 
         #region Commands
+        public ICommand AddWineCommand
+        {
+            get { return  new RelayCommand(AddWine);}
+        }
+
+        private async void AddWine()
+        {
+            await navigationservice.Navigate("NewWineView");
+        }
 
         #endregion
 
