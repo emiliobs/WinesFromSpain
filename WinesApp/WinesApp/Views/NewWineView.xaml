@@ -20,7 +20,7 @@
         </Label>
         <Entry
             Text="{Binding Name, Mode=TwoWay}"
-            Keyboard="Numeric"
+            
             Placeholder="Enter a Name wine...">
         </Entry>
         <Label
@@ -28,7 +28,7 @@
         </Label>
         <Entry
             Text="{Binding Variety, Mode=TwoWay}"
-            Keyboard="Numeric"
+            
             Placeholder="Enter a Variety...">
         </Entry>
         <Label
@@ -36,7 +36,7 @@
         </Label>
         <Entry
             Text="{Binding Tasting, Mode=TwoWay}"
-            Keyboard="Numeric"
+           
             Placeholder="Enter a Tasting...">
         </Entry>
         <Label
@@ -44,7 +44,7 @@
         </Label>
         <Entry
             Text="{Binding Pairing, Mode=TwoWay}"
-            Keyboard="Numeric"
+          
             Placeholder="Enter a Pairing...">
         </Entry>
         <Label

@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using WinesApp.Annotations;
+using WinesApp.Model;
 using WinesApp.Service;
 
 namespace WinesApp.ViewModels
@@ -12,6 +13,8 @@ namespace WinesApp.ViewModels
         #region Atributes
 
         private DialogService dialogService;
+        private ApiService apiService;
+        private Navigationservice navigationservice;
 
         private string type;
         private string name;
@@ -53,7 +56,7 @@ namespace WinesApp.ViewModels
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
                 }
             }
-            get { return type; }
+            get { return name; }
         }
 
         public string Variety
@@ -189,6 +192,37 @@ namespace WinesApp.ViewModels
                 return;
             }
 
+         
+                       
+           var wine = new Wine()
+           {
+               Name = Name,
+               Price = Price,
+               Type = Type,
+               Variety = Variety,
+               Tasting = Tasting,
+               Pairing = Pairing,
+               
+           };
+
+            IsRunning = true;
+            IsEnable = false;
+
+            var response = await apiService.Post("http://winesbackend20170603020054.azurewebsites.net", "/api", "/Wines", wine);
+
+            //aqui pregunto si si pudo agregar el nuevo dato:
+            if (!response.IsSuccess)
+            {
+                await dialogService.ShowMessage("Error", response.Message);
+                return;
+            }
+
+            //si si lo pudo ingresar lo regreso al la pagina principal:
+            await  navigationservice.BackViews();
+
+            IsRunning = false;
+            IsEnable = true;
+
         }
 
 
@@ -200,6 +234,8 @@ namespace WinesApp.ViewModels
             IsEnable = true;
 
             dialogService = new DialogService();
+            apiService = new ApiService();
+            navigationservice = new Navigationservice();
         }
         #endregion
 
