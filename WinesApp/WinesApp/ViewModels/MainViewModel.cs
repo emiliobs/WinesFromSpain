@@ -17,6 +17,7 @@ namespace WinesApp.ViewModels
 
         private ApiService apiService;
         private Navigationservice navigationservice;
+        private DialogService dialogService;
 
 
         #endregion
@@ -55,6 +56,7 @@ namespace WinesApp.ViewModels
             //Service
             apiService = new ApiService();
             navigationservice = new Navigationservice();
+            dialogService = new DialogService();
 
             //View Models;
             Wines = new ObservableCollection<WineItemViewModel>();
@@ -85,10 +87,16 @@ namespace WinesApp.ViewModels
         private async void LoadWines()
         {
             //aqui ya uso el  apiservice instanciado, con sus metodos y parametros:
-            var wines = await apiService.Get<Wine>("http://winesbackend20170603020054.azurewebsites.net", "/api", "/Wines");
+            var response = await apiService.Get<Wine>("http://winesbackend20170603020054.azurewebsites.net", "/api", "/Wines");
+
+            if (!response.IsSuccess)
+            {
+                await dialogService.ShowMessage("Error", response.Message);
+                return;
+            }
 
             //aqui atomiso el método para mejor practicas de programación:
-            ReloadWines(wines);
+            ReloadWines((List<Wine>)response.Result);
 
         }
 
