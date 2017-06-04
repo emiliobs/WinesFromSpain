@@ -18,13 +18,29 @@ namespace WinesApp.ViewModels
         private ApiService apiService;
         private Navigationservice navigationservice;
 
+
         #endregion
 
         #region Properties
 
         public ObservableCollection<WineItemViewModel> Wines { get; set; }
+        public NewWineViewModel NewWine { get; set; }
 
-        
+        #endregion
+
+        #region Singleton
+
+        private static MainViewModel instance;
+
+        public static MainViewModel GetInstance()
+        {
+            if (instance == null)
+            {
+                instance = new MainViewModel();
+            }
+
+            return instance;
+        }
 
         #endregion
 
@@ -32,13 +48,19 @@ namespace WinesApp.ViewModels
 
         public MainViewModel()
         {
+
+            //singleton:
+            instance = this;// la instancia soy yo:
+
             //Service
             apiService = new ApiService();
             navigationservice = new Navigationservice();
 
             //View Models;
             Wines = new ObservableCollection<WineItemViewModel>();
-                    
+            //la idea es crarlo cuando se vaya a utilizar, patron singleton:
+            //NewWine = new NewWineViewModel();
+
             //Load Data:
             LoadWines();
 

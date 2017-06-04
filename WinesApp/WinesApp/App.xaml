@@ -13,7 +13,9 @@
             
             <!--General Color-->
             <Color x:Key="BackgroundColor">#ffd8c2</Color>
-            
+            <Color x:Key="ButtonSave">#ff7f7a</Color>
+            <Color x:Key="ButtonTextColor">#ffccfc</Color>
+
         </ResourceDictionary>
 
 	</Application.Resources>

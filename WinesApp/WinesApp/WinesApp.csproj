@@ -43,10 +43,13 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Wine.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ApiService.cs" />
+    <Compile Include="Service\DialogService.cs" />
     <Compile Include="Service\Navigationservice.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NewWineViewModel.cs" />
     <Compile Include="ViewModels\WineItemViewModel.cs" />
     <Compile Include="Views\NewWineView.xaml.cs">
       <DependentUpon>NewWineView.xaml</DependentUpon>

@@ -5,9 +5,70 @@
              Title="New Wines"
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
              BackgroundColor="{StaticResource BackgroundColor}">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin Forms!" />
-        </StackLayout>
-    </ContentPage.Content>
+    
+    <ScrollView>
+    <StackLayout Padding="5" BindingContext="{Binding NewWine}">
+        <Label
+            Text="Type">
+        </Label>
+        <Entry
+            Text="{Binding Type, Mode=TwoWay}"
+            Placeholder="Enter a Type wine...">
+        </Entry>
+        <Label
+            Text="Name">
+        </Label>
+        <Entry
+            Text="{Binding Name, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a Name wine...">
+        </Entry>
+        <Label
+            Text="Variety">
+        </Label>
+        <Entry
+            Text="{Binding Variety, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a Variety...">
+        </Entry>
+        <Label
+            Text="Tasting">
+        </Label>
+        <Entry
+            Text="{Binding Tasting, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a Tasting...">
+        </Entry>
+        <Label
+            Text="Pairing">
+        </Label>
+        <Entry
+            Text="{Binding Pairing, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a Pairing...">
+        </Entry>
+        <Label
+            Text="Price">
+        </Label>
+        <Entry
+            Text="{Binding Price, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a price...">
+        </Entry>
+        <ActivityIndicator
+            IsRunning="{Binding IsRunning, Mode=TwoWay}">
+        </ActivityIndicator>
+        <Button
+            Command="{Binding NewWineCommand}"
+            IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+            BorderRadius="20"
+            HeightRequest="40"
+            BackgroundColor="{StaticResource ButtonSave}"
+            TextColor="{StaticResource ButtonTextColor}"
+            Text="New">
+        </Button>
+
+    </StackLayout>
+    </ScrollView>
+
 </ContentPage>

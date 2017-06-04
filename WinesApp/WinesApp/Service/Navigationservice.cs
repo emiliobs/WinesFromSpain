@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WinesApp.ViewModels;
 using WinesApp.Views;
 
 namespace WinesApp.Service
@@ -14,6 +15,11 @@ namespace WinesApp.Service
             switch (pageName)
             {
                 case "NewWineView":
+
+                    //aqui consumo el singleton, cuando el ingrese aui ya el objeto esta generado y ya se puede bindiar:
+                    var mainViewModel = MainViewModel.GetInstance();
+                    mainViewModel.NewWine = new NewWineViewModel();
+
                     await App.Current.MainPage.Navigation.PushAsync(new NewWineView());
                     break;
                 default:
