@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using WinesApp.Annotations;
 using WinesApp.Model;
 using WinesApp.Service;
+using WinesApp.Views;
 
 namespace WinesApp.ViewModels
 {
@@ -30,6 +31,9 @@ namespace WinesApp.ViewModels
 
         public ObservableCollection<WineItemViewModel> Wines { get; set; }
         public NewWineViewModel NewWine { get; set; }
+
+        public EditeWineViewModel EditWine { get; set; }
+       
 
         public bool IsRefreshing
         {
@@ -99,6 +103,8 @@ namespace WinesApp.ViewModels
         {
             get { return  new RelayCommand(Refresh);}
         }
+
+       
 
         private void Refresh()
         {

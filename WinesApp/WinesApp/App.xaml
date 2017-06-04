@@ -14,12 +14,18 @@
             <!--General Color-->
             <Color x:Key="BackgroundColor">#ffd8c2</Color>
             <Color x:Key="ButtonSave">#ff7f7a</Color>
+            <Color x:Key="ButtonDelete">#e84d26</Color>
             <Color x:Key="ButtonTextColor">#ffccfc</Color>
             
             <!--DataTemplate-->
             <DataTemplate x:Key="WinerDataTemplate">
                 <ViewCell>
                     <Grid Padding="8">
+                        <!--//Esto me sirve para genrar un especia hipervinculo para navegar a ota página en este caso:-->
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditWineCommand}"></TapGestureRecognizer>
+                        </Grid.GestureRecognizers>
+                        
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>

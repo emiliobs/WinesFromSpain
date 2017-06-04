@@ -27,27 +27,24 @@
             Text="Variety">
         </Label>
         <Entry
-            Text="{Binding Variety, Mode=TwoWay}"
-            
-            Placeholder="Enter a Variety...">
+            Text="{Binding Variety, Mode=TwoWay}" 
+            Placeholder="Enter a Variety wine.">
         </Entry>
         <Label
             Text="Tasting">
         </Label>
-        <Entry
-            Text="{Binding Tasting, Mode=TwoWay}"
-           
-            Placeholder="Enter a Tasting...">
-        </Entry>
+        <Editor
+            Text="{Binding Tasting, Mode=TwoWay}"   
+        >
+        </Editor>
         <Label
             Text="Pairing">
         </Label>
-        <Entry
+        <Editor
             Text="{Binding Pairing, Mode=TwoWay}"
-          
-            Placeholder="Enter a Pairing...">
-        </Entry>
-        <Label
+        >
+        </Editor>
+            <Label
             Text="Price">
         </Label>
         <Entry
@@ -65,6 +62,7 @@
             HeightRequest="40"
             BackgroundColor="{StaticResource ButtonSave}"
             TextColor="{StaticResource ButtonTextColor}"
+            HorizontalOptions="FillAndExpand"
             Text="New">
         </Button>
 

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WinesApp.Views.EditWineView"
+             Title="Edit Wines."
+             BindingContext="{Binding Main, Source={StaticResource Locator}}"
+             BackgroundColor="{StaticResource BackgroundColor}">    
+
+    <ScrollView>
+        <StackLayout Padding="5" BindingContext="{Binding EditWine}">
+        <Label
+            Text="Type">
+        </Label>
+        <Entry
+            Text="{Binding Type, Mode=TwoWay}"
+            Placeholder="Enter a Type wine...">
+        </Entry>
+        <Label
+            Text="Name">
+        </Label>
+        <Entry
+            Text="{Binding Name, Mode=TwoWay}"
+            
+            Placeholder="Enter a Name wine...">
+        </Entry>
+        <Label
+            Text="Variety">
+        </Label>
+            <Entry
+                Text="{Binding Variety, Mode=TwoWay}" 
+                Placeholder="Enter a Variety wine.">
+            </Entry>
+            <Label
+            Text="Tasting">
+        </Label>
+        <Editor
+            Text="{Binding Tasting, Mode=TwoWay}"   
+            >
+        </Editor>
+        <Label
+            Text="Pairing">
+        </Label>
+        <Editor
+            Text="{Binding Pairing, Mode=TwoWay}"
+             >
+        </Editor>
+        <Label
+            Text="Price">
+        </Label>
+        <Entry
+            Text="{Binding Price, Mode=TwoWay}"
+            Keyboard="Numeric"
+            Placeholder="Enter a price...">
+        </Entry>
+            
+        <ActivityIndicator
+            IsRunning="{Binding IsRunning, Mode=TwoWay}">
+        </ActivityIndicator>
+            
+            <StackLayout Orientation="Horizontal">
+                <Button
+                    Command="{Binding SaveWineCommand}"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    BorderRadius="20"
+                    HeightRequest="40"
+                    BackgroundColor="{StaticResource ButtonSave}"
+                    TextColor="{StaticResource ButtonTextColor}"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Save">
+                </Button>
+                <Button
+                    Command="{Binding DeleteWineCommand}"
+                    IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                    BorderRadius="20"
+                    HeightRequest="40"
+                    BackgroundColor="{StaticResource ButtonDelete}"
+                    TextColor="{StaticResource ButtonTextColor}"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Delete">
+                </Button>
+            </StackLayout>
+       
+        </StackLayout>
+    </ScrollView>
+
+
+</ContentPage>
