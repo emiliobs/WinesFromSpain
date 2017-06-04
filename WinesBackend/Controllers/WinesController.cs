@@ -18,7 +18,7 @@ namespace WinesBackend.Controllers
         // GET: Wines
         public async Task<ActionResult> Index()
         {
-            return View(await db.Wines.ToListAsync());
+            return View(await db.Wines.OrderBy(w=>w.Type).ThenBy(w=>w.Name).ToListAsync());
         }
 
         // GET: Wines/Details/5

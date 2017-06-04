@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using WinesApp.Annotations;
 using WinesApp.Model;
 using WinesApp.Service;
 
 namespace WinesApp.ViewModels
 {
-    public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
         #region Atributtes
 
@@ -19,6 +22,7 @@ namespace WinesApp.ViewModels
         private Navigationservice navigationservice;
         private DialogService dialogService;
 
+        private bool isRefreshing;
 
         #endregion
 
@@ -26,6 +30,21 @@ namespace WinesApp.ViewModels
 
         public ObservableCollection<WineItemViewModel> Wines { get; set; }
         public NewWineViewModel NewWine { get; set; }
+
+        public bool IsRefreshing
+        {
+
+            set
+            {
+                if (isRefreshing != value)
+                {
+                    isRefreshing = value;
+
+                    OnPropertyChanged();
+                }
+            }
+            get { return isRefreshing; }
+        }
 
         #endregion
 
@@ -64,7 +83,7 @@ namespace WinesApp.ViewModels
             //NewWine = new NewWineViewModel();
 
             //Load Data:
-            LoadWines();
+            //LoadWines();//ya lo estoy invocando desde el commands en llamado desde el codiback de la wineview.xaml:
 
         }
 
@@ -75,6 +94,22 @@ namespace WinesApp.ViewModels
         {
             get { return  new RelayCommand(AddWine);}
         }
+
+        public ICommand RefresWinehCommand
+        {
+            get { return  new RelayCommand(Refresh);}
+        }
+
+        private void Refresh()
+        {
+            IsRefreshing = true;
+
+            LoadWines();
+
+            IsRefreshing = false;
+
+        }
+
 
         private async void AddWine()
         {
@@ -125,7 +160,15 @@ namespace WinesApp.ViewModels
         #endregion
 
         #region Events
+        public event PropertyChangedEventHandler PropertyChanged;
 
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         #endregion
+
+
     }
 }

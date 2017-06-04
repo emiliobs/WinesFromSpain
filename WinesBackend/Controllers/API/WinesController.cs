@@ -20,7 +20,7 @@ namespace WinesBackend.Controllers.API
         // GET: api/Wines
         public IQueryable<Wine> GetWines()
         {
-            return db.Wines;
+            return db.Wines.OrderBy(w=>w.Type).ThenBy(w=>w.Name);
         }
 
         // GET: api/Wines/5

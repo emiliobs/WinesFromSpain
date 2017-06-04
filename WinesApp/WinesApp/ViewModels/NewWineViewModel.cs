@@ -53,7 +53,8 @@ namespace WinesApp.ViewModels
                 {
                     name = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
+                    OnPropertyChanged();
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Name"));
                 }
             }
             get { return name; }
@@ -81,7 +82,8 @@ namespace WinesApp.ViewModels
                 {
                     tasting = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Tasting"));
+                    OnPropertyChanged();
+                    // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Tasting"));
                 }
             }
             get { return tasting; }
@@ -95,7 +97,8 @@ namespace WinesApp.ViewModels
                 {
                     pairing = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Pairing"));
+                    OnPropertyChanged();
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Pairing"));
                 }
             }
             get { return pairing; }
@@ -109,7 +112,8 @@ namespace WinesApp.ViewModels
                 {
                     price = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price"));
+                    OnPropertyChanged();
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Price"));
                 }
             }
             get { return price; }
@@ -123,7 +127,8 @@ namespace WinesApp.ViewModels
                 {
                     isRunning = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
+                    OnPropertyChanged();
+                    //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsRunning"));
                 }
             }
             get { return isRunning; }
@@ -137,7 +142,8 @@ namespace WinesApp.ViewModels
                 {
                     isEnable = value;
 
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsEnable"));
+                    OnPropertyChanged();
+                    // PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsEnable"));
                 }
             }
             get { return isEnable; }

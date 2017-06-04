@@ -7,71 +7,17 @@
              BackgroundColor="{StaticResource BackgroundColor}">
     
                
-            <ListView
-                ItemsSource="{Binding Wines}" HasUnevenRows="True">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Grid Padding="8">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-                                <Image
-                                    Source="ic_launcher.png"
-                                    VerticalOptions="Start"
-                                    WidthRequest="50"
-                                    HeightRequest="50"/>
-                                <StackLayout Grid.Column="1">
-                                    <Label
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Type}">
-
-                                    </Label>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Name}"
-                                        TextColor="Red">
-
-                                    </Label>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Variety}"
-                                        TextColor="Black">
-
-                                    </Label>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Tasting}"
-                                        TextColor="Black">
-
-                                    </Label>
-                                    <Label
-                                        TextColor="Black"
-                                        FontAttributes="Bold"
-                                        VerticalOptions="Center"
-                                        Text="{Binding Pairing}">
-
-                                    </Label>
-                                    <Label
-                                
-                                        VerticalOptions="Center"
-                                        Text="{Binding Price, StringFormat='{0:C2}'}"
-                                        TextColor="Red"/>
-                                </StackLayout>
-                            </Grid>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+            <ListView ItemsSource="{Binding Wines}" 
+                      HasUnevenRows="True"
+                      ItemTemplate="{StaticResource WinerDataTemplate}"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefresWinehCommand}"
+                      IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">     
                 
-
+            </ListView>
+    
    <ContentPage.ToolbarItems>
-        <ToolbarItem  Icon="ic_action_add_circle.png" Command="{Binding AddWineCommand}" Text="New Wine.!"></ToolbarItem>
+       <ToolbarItem  Icon="ic_action_add_circle.png" Command="{Binding AddWineCommand}" Text="New Wine.!"></ToolbarItem>
     </ContentPage.ToolbarItems>
         
      
