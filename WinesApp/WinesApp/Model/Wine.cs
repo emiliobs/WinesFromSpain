@@ -18,6 +18,18 @@ namespace WinesApp.Model
         public string Pairing { get; set; }
         public decimal Price { get; set; }
 
+        public string ImageFullPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Image))
+                {
+                    return "ic_launcher.png";
+                }
+
+                return $"http://winesbackend20170603020054.azurewebsites.net{Image.Substring(1)}";
+            }
+        }
         //lo utilizo para devolver la clave primerai para poder actualizar y eliminar:
         public override int GetHashCode()
         {

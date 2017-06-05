@@ -31,7 +31,8 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image
-                            Source="ceciosreserva.png"
+                            Source="{Binding ImageFullPath}"
+                            Aspect="AspectFill"
                             VerticalOptions="Start"
                             WidthRequest="50"
                             HeightRequest="200"/>

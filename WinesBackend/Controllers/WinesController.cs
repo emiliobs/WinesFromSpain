@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WinesBackend.Classes;
 using WinesBackend.Models;
 
 namespace WinesBackend.Controllers
@@ -28,12 +29,17 @@ namespace WinesBackend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Wine wine = await db.Wines.FindAsync(id);
+
             if (wine == null)
             {
                 return HttpNotFound();
             }
-            return View(wine);
+
+            var view = ToView(wine);
+           
+            return View(view);
         }
 
         // GET: Wines/Create
@@ -47,16 +53,55 @@ namespace WinesBackend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "WineId,Type,Name,Image,Variety,Tasting,Pairing,Price")] Wine wine)
+        public async Task<ActionResult> Create(WineView view)
         {
             if (ModelState.IsValid)
             {
-                db.Wines.Add(wine);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                var picture = string.Empty;
+                var folder = "~/Content/Images";
+
+                if (view.ImageFile != null)
+                {
+                    picture = FilesHelper.UploadPhoto(view.ImageFile, folder);
+                    picture = $"{folder}/{picture}";
+                }
+
+
+                try
+                {
+                    var wine = ToWine(view);
+                    wine.Image = picture;
+
+                    db.Wines.Add(wine);
+                    await db.SaveChangesAsync();
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+                
             }
 
-            return View(wine);
+            return View(view);
+        }
+
+        private Wine ToWine(WineView view)
+        {
+            return new Wine()
+            {
+                Name = view.Name,
+                Pairing = view.Pairing,
+                Type = view.Type,
+                Price = view.Price,
+                Variety = view.Variety,
+                Tasting = view.Tasting,
+                WineId = view.WineId,
+                Image = view.Image,
+            };
         }
 
         // GET: Wines/Edit/5
@@ -66,12 +111,32 @@ namespace WinesBackend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Wine wine = await db.Wines.FindAsync(id);
+
+            var wine = await db.Wines.FindAsync(id);
+
             if (wine == null)
             {
                 return HttpNotFound();
             }
-            return View(wine);
+
+            var view = ToView(wine);
+
+            return View(view);
+        }
+
+        private WineView ToView(Wine wine)
+        {
+            return  new WineView()
+            {
+                Name =  wine.Name,
+                Pairing = wine.Pairing,
+                Type = wine.Type,
+                Price = wine.Price,
+                Variety = wine.Variety,
+                Tasting = wine.Tasting,
+                Image = wine.Image,
+                WineId = wine.WineId
+            };
         }
 
         // POST: Wines/Edit/5
@@ -79,15 +144,41 @@ namespace WinesBackend.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "WineId,Type,Name,Image,Variety,Tasting,Pairing,Price")] Wine wine)
+        public async Task<ActionResult> Edit(WineView view)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(wine).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+                var picture = view.Image;
+                var folder = "~/Content/Images";
+
+                if (view.ImageFile != null)
+                {
+                    picture = FilesHelper.UploadPhoto(view.ImageFile, folder);
+                    picture = $"{folder}/{picture}";
+                }
+
+                try
+                {
+
+                    var wine = ToWine(view);
+                    wine.Image = picture;
+
+                    db.Entry(wine).State = EntityState.Modified;
+
+                    await db.SaveChangesAsync();
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+                
             }
-            return View(wine);
+            return View(view);
         }
 
         // GET: Wines/Delete/5
@@ -97,12 +188,17 @@ namespace WinesBackend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Wine wine = await db.Wines.FindAsync(id);
+
             if (wine == null)
             {
                 return HttpNotFound();
             }
-            return View(wine);
+
+            var view = ToView(wine);
+
+            return View(view);
         }
 
         // POST: Wines/Delete/5
@@ -111,8 +207,11 @@ namespace WinesBackend.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Wine wine = await db.Wines.FindAsync(id);
+
             db.Wines.Remove(wine);
+
             await db.SaveChangesAsync();
+
             return RedirectToAction("Index");
         }
 
