@@ -127,9 +127,33 @@ namespace WinesApp.ViewModels
 
         
 
-        private void DeleteWine()
+        private async void DeleteWine()
         {
-            throw new NotImplementedException();
+            var answer = await dialogService.ShowConfirm("Confirm", "Are you sure to delte this?");
+
+            if (!answer)
+            {
+               return; 
+            }
+
+            //si estru true borro el dato:
+            //aqui ya utilizo el apiservice que invoca al metodo put (actualizar)
+            IsRunning = true;
+            IsEnabled = false;
+
+            var response = await apiService.Delete("http://winesbackend20170603020054.azurewebsites.net", "/api", "/Wines", this);//this = al objeto wine(all atributos)
+
+            IsRunning = false;
+            IsEnabled = true;
+
+            //aqui, preguntos si no problama:
+            if (!response.IsSuccess)
+            {
+                await dialogService.ShowMessage("Error", response.Message);
+                return;
+            }
+
+            await navigationservice.BackViews();
         }
 
       
