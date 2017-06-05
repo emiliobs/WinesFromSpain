@@ -134,7 +134,9 @@ namespace WinesApp.ViewModels
             get { return isRunning; }
         }
 
-        public bool IsEnable
+       
+
+        public bool IsEnabled
         {
             set
             {
@@ -158,6 +160,8 @@ namespace WinesApp.ViewModels
         {
             get { return new RelayCommand(NewWine); }
         }
+
+        
 
         private async void NewWine()
         {
@@ -212,7 +216,7 @@ namespace WinesApp.ViewModels
            };
 
             IsRunning = true;
-            IsEnable = false;
+            IsEnabled = false;
 
             var response = await apiService.Post("http://winesbackend20170603020054.azurewebsites.net", "/api", "/Wines", wine);
 
@@ -227,7 +231,7 @@ namespace WinesApp.ViewModels
             await  navigationservice.BackViews();
 
             IsRunning = false;
-            IsEnable = true;
+            IsEnabled = true;
 
         }
 
@@ -237,7 +241,7 @@ namespace WinesApp.ViewModels
         #region Constructor           
         public NewWineViewModel()
         {
-            IsEnable = true;
+            IsEnabled = true;
 
             dialogService = new DialogService();
             apiService = new ApiService();

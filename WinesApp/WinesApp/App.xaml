@@ -31,10 +31,10 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image
-                            Source="ic_launcher.png"
+                            Source="ceciosreserva.png"
                             VerticalOptions="Start"
                             WidthRequest="50"
-                            HeightRequest="50"/>
+                            HeightRequest="200"/>
                         <StackLayout Grid.Column="1">
                             <Label
                                 FontAttributes="Bold"

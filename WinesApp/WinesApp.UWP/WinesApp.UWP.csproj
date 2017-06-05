@@ -108,6 +108,14 @@
     <None Include="WinesApp.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Assets\ic_launcher.png" />
+    <AndroidResource Include="Assets\ceciosreserva.png" />
+    <AndroidResource Include="Assets\ic_action_add_circle.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-100.png" />
     <Content Include="Assets\LockScreenLogo.scale-125.png" />

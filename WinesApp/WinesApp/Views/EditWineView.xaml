@@ -4,10 +4,10 @@
              x:Class="WinesApp.Views.EditWineView"
              Title="Edit Wines."
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
-             BackgroundColor="{StaticResource BackgroundColor}">    
+             BackgroundColor="{StaticResource BackgroundColor}">
 
-    <ScrollView>
-        <StackLayout Padding="5" BindingContext="{Binding EditWine}">
+    <ScrollView BindingContext="{Binding EditWine}">
+        <StackLayout Padding="5">
         <Label
             Text="Type">
         </Label>

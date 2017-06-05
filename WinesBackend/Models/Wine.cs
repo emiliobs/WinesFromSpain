@@ -31,7 +31,7 @@ namespace WinesBackend.Models
         public string Pairing { get; set; }
 
         [Required]   
-        [DisplayFormat(DataFormatString = "{0:C2}",ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = " {0} €",ApplyFormatInEditMode = false)]
         public decimal Price { get; set; }
         
     }

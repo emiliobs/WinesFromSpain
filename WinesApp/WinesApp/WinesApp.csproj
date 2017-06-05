@@ -52,7 +52,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NewWineViewModel.cs" />
     <Compile Include="ViewModels\WineItemViewModel.cs" />
-    <Compile Include="Views\EditeWineViewModel.cs" />
+    <Compile Include="ViewModels\EditeWineViewModel.cs" />
     <Compile Include="Views\EditWineView.xaml.cs">
       <DependentUpon>EditWineView.xaml</DependentUpon>
     </Compile>

@@ -17,5 +17,11 @@ namespace WinesApp.Model
         public string Tasting { get; set; }
         public string Pairing { get; set; }
         public decimal Price { get; set; }
+
+        //lo utilizo para devolver la clave primerai para poder actualizar y eliminar:
+        public override int GetHashCode()
+        {
+            return WineId;
+        }
     }
 }
