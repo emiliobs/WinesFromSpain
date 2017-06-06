@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
              x:Class="WinesApp.Views.EditWineView"
              Title="Edit Wines."
              BindingContext="{Binding Main, Source={StaticResource Locator}}"
@@ -8,7 +9,10 @@
 
     <ScrollView BindingContext="{Binding EditWine}">
         <StackLayout Padding="5">
-        <Label
+
+            <Image Source="{Binding ImageFullPath}" HeightRequest="200" WidthRequest="100"></Image>
+
+            <Label
             Text="Type">
         </Label>
         <Entry
@@ -52,12 +56,24 @@
             Keyboard="Numeric"
             Placeholder="Enter a price...">
         </Entry>
+
+          
             
         <ActivityIndicator
             IsRunning="{Binding IsRunning, Mode=TwoWay}">
         </ActivityIndicator>
             
             <StackLayout Orientation="Horizontal">
+
+                <Button Image="ic_camera_alt.png" 
+                        Text="Take Picture" 
+                        Command="{Binding TakePictureCommand}"
+                        IsEnabled="{Binding IsEnabled, Mode=TwoWay}"
+                        TextColor="{StaticResource ButtonTextColor}"
+                        BackgroundColor="{StaticResource ButtonSave}">
+
+                </Button>
+
                 <Button
                     Command="{Binding SaveWineCommand}"
                     IsEnabled="{Binding IsEnabled, Mode=TwoWay}"

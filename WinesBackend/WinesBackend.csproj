@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Classes\FilesHelper.cs" />
+    <Compile Include="Classes\WineRequest.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\WinesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

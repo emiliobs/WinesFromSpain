@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using WinesBackend.Classes;
 using WinesBackend.Models;
 
 namespace WinesBackend.Controllers.API
@@ -38,17 +40,35 @@ namespace WinesBackend.Controllers.API
 
         // PUT: api/Wines/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutWine(int id, Wine wine)
+        public async Task<IHttpActionResult> PutWine(int id, WineRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != wine.WineId)
+            if (id != request.WineId)
             {
                 return BadRequest();
             }
+
+
+            if (request.ImageArray != null && request.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(request.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                var folder = "~/Content/Images";
+                var fullPath = $"{folder}/{file}";
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    request.Image = fullPath;
+                }
+            }
+
+            var wine = ToWine(request);
 
             db.Entry(wine).State = EntityState.Modified;
 
@@ -73,17 +93,51 @@ namespace WinesBackend.Controllers.API
 
         // POST: api/Wines
         [ResponseType(typeof(Wine))]
-        public async Task<IHttpActionResult> PostWine(Wine wine)
+        public async Task<IHttpActionResult> PostWine(WineRequest request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+
+            if (request.ImageArray != null && request.ImageArray.Length > 0)
+            {
+                var stream = new MemoryStream(request.ImageArray);
+                var guid = Guid.NewGuid().ToString();
+                var file = $"{guid}.jpg";
+                var folder = "~/Content/Images";
+                var fullPath = $"{folder}/{file}";
+                var response = FilesHelper.UploadPhoto(stream, folder, file);
+
+                if (response)
+                {
+                    request.Image = fullPath;
+                }
+            }
+
+            var wine = ToWine(request);
+
             db.Wines.Add(wine);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = wine.WineId }, wine);
+        }
+
+        private Wine ToWine(WineRequest request)
+        {
+            return  new Wine()
+            {
+                Name = request.Name,
+                Pairing = request.Pairing,
+                Type = request.Type,
+                Price = request.Price,
+                Variety = request.Variety,
+                Tasting = request.Tasting,
+                Image = request.Image,
+                WineId = request.WineId,
+                
+            };
         }
 
         // DELETE: api/Wines/5
